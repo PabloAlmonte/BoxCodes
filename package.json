@@ -3,15 +3,21 @@
 	"displayName": "boxcode",
 	"description": "Box for save your codes",
 	"version": "0.0.1",
+	"repository": {
+		"url": "https://github.com/PabloAlmonte/BoxCodes.git",
+		"type": "git"
+	},
 	"icon": "public/images/logo.png",
 	"publishConfig": {
-		"name": "boxcode"
+		"name": "Dekudev"
 	},
-	"publisher": "boxcode",
+	"publisher": "Dekudev",
 	"engines": {
 		"vscode": "^1.31.0"
 	},
 	"categories": [
+		"Programming Languages",
+		"Snippets",
 		"Other"
 	],
 	"activationEvents": [
