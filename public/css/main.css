@@ -1,0 +1,34 @@
+*{
+    box-sizing: border-box;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section .item {
+    flex: 1;
+    min-width: 300px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+section .item .hd{
+
+}
+section .item .bd{
+    flex: 1;
+}
+
+section .item .bd pre{
+    height: 100%;
+    margin-top: 0;
+}
+
+section .item .bd code{
+    height: 100%;
+}

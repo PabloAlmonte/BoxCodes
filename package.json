@@ -1,0 +1,53 @@
+{
+	"name": "boxcode",
+	"displayName": "boxcode",
+	"description": "Box for save your codes",
+	"version": "0.0.1",
+	"icon": "public/images/logo.png",
+	"publishConfig": {
+		"name": "boxcode"
+	},
+	"publisher": "boxcode",
+	"engines": {
+		"vscode": "^1.31.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.savecode",
+		"onCommand:extension.showcodes",
+		"onCommand:extension.boxcodes"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.savecode",
+				"title": "Save Code"
+			},
+			{
+				"command": "extension.showcodes",
+				"title": "Show Codes"
+			},
+			{
+				"command": "extension.boxcodes",
+				"title": "Box Codes"
+			}
+		]
+	},
+	"scripts": {
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28",
+		"eslint": "^5.13.0",
+		"@types/node": "^10.12.21",
+		"@types/mocha": "^2.2.42"
+	},
+	"dependencies": {
+		"request": "^2.88.0"
+	}
+}
