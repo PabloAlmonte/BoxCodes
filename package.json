@@ -9,9 +9,9 @@
 	},
 	"icon": "public/images/logo.png",
 	"publishConfig": {
-		"name": "Dekudev"
+		"name": "Box Codes"
 	},
-	"publisher": "Dekudev",
+	"publisher": "PabloAlmonte",
 	"engines": {
 		"vscode": "^1.31.0"
 	},
