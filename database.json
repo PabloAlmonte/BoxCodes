@@ -1,9 +1,1 @@
-{
-    "codes": {
-        "182zzwon7": {
-            "title": "Hello World in Python",
-            "text": "print \"hello World\";",
-            "languaje": "python"
-        }
-    }
-}
+{"codes":{"182zzwon7":{"title":"Hello World in Python","text":"print \"hello World\";","languaje":"python"},"bbowa199n":{"title":"Welcome Function","text":"function saludar(name){\n    let text = `Hello ${name}, how are you today?`;\n    return text;\n}","languaje":"javascript"}}}

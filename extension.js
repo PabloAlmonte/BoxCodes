@@ -15,12 +15,12 @@ const defaulDB = {
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+	
 	// Creating Database in case no exist;
 	var pathDB = `${context.extensionPath}/database.json`;
 	if(!fs.existsSync(pathDB)) fs.writeFileSync(pathDB, JSON.stringify(defaulDB));
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "boxcode" is now active!');
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
@@ -60,6 +60,7 @@ function activate(context) {
 	});
 
 	let showCodesSaved = vscode.commands.registerCommand("extension.showcodes", () => {
+		var database = JSON.parse(fs.readFileSync(pathDB).toString());
 		const panel = vscode.window.createWebviewPanel(
 			'catCoding', // Identifies the type of the webview. Used internally
 			'Box Codes', // Title of the panel displayed to the user
@@ -69,13 +70,21 @@ function activate(context) {
 				localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'public'))]
 			} // Webview options. More on these later.
 		);
+		panel.iconPath = vscode.Uri.file(context.extensionPath + '/public/images/logo.png');
+
+		panel.onDidChangeViewState((e) => {
+			if(e.webviewPanel._visible){
+				setTimeout(() => {
+					panel.webview.postMessage({codes: database.codes});
+				}, 1000);
+			}
+		})
 
 		let indexHTML = fs.readFileSync(`${context.extensionPath}/public/index.html`).toString().replace(/{{(.*)}}/g, (t, a) => eval(a));
 		panel.webview.html = indexHTML;
-		var database = JSON.parse(fs.readFileSync(pathDB).toString());
 		setTimeout(() => {
 			panel.webview.postMessage({codes: database.codes});
-		}, 2000);
+		}, 1000);
 	});
 
 	let selectCodes = vscode.commands.registerCommand("extension.boxcodes", () => {
@@ -83,8 +92,8 @@ function activate(context) {
 		var database = JSON.parse(fs.readFileSync(pathDB).toString());
 		let codes = database.codes;
 		console.log(codes);
-		quickPick.items = Object.keys(codes).map(id => ({index: id, label: codes[id].title}));
-
+		quickPick.items = Object.keys(codes).map(id => ({index: id, label: codes[id].title, description: codes[id].languaje, detail: codes[id].text}));
+		
 		quickPick.onDidChangeSelection(selection => {
 			if(!selection[0]) return;
 			let index = selection[0].index;

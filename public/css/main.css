@@ -22,6 +22,7 @@ section .item .hd{
 }
 section .item .bd{
     flex: 1;
+    position: relative
 }
 
 section .item .bd pre{
@@ -31,4 +32,16 @@ section .item .bd pre{
 
 section .item .bd code{
     height: 100%;
+}
+
+/* Icons */
+
+.iconLang {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.iconLang svg {
+    width: 30px;
 }
