@@ -70,28 +70,22 @@ function activate(context) {
 				localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'public'))]
 			} // Webview options. More on these later.
 		);
+		
 		panel.iconPath = vscode.Uri.file(context.extensionPath + '/public/images/logo.png');
-
-		panel.onDidChangeViewState((e) => {
-			if(e.webviewPanel._visible){
-				setTimeout(() => {
-					panel.webview.postMessage({codes: database.codes});
-				}, 1000);
-			}
-		})
-
 		let indexHTML = fs.readFileSync(`${context.extensionPath}/public/index.html`).toString().replace(/{{(.*)}}/g, (t, a) => eval(a));
 		panel.webview.html = indexHTML;
-		setTimeout(() => {
+
+		panel.webview.onDidReceiveMessage((e) => {
 			panel.webview.postMessage({codes: database.codes});
-		}, 1000);
+		});
+
+		panel.onDidDispose((e) => panel.dispose());
 	});
 
 	let selectCodes = vscode.commands.registerCommand("extension.boxcodes", () => {
 		let quickPick = vscode.window.createQuickPick();
 		var database = JSON.parse(fs.readFileSync(pathDB).toString());
 		let codes = database.codes;
-		console.log(codes);
 		quickPick.items = Object.keys(codes).map(id => ({index: id, label: codes[id].title, description: codes[id].languaje, detail: codes[id].text}));
 		
 		quickPick.onDidChangeSelection(selection => {
