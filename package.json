@@ -2,7 +2,7 @@
 	"name": "boxcode",
 	"displayName": "Box Code",
 	"description": "Box for save your codes",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"repository": {
 		"url": "https://github.com/PabloAlmonte/BoxCodes.git",
 		"type": "git"
@@ -23,7 +23,8 @@
 	"activationEvents": [
 		"onCommand:extension.savecode",
 		"onCommand:extension.showcodes",
-		"onCommand:extension.boxcodes"
+		"onCommand:extension.boxcodes",
+		"onCommand:extension.deletecodes"
 	],
 	"main": "./extension.js",
 	"contributes": {
@@ -35,6 +36,10 @@
 			{
 				"command": "extension.showcodes",
 				"title": "Show Codes"
+			},
+			{
+				"command": "extension.deletecodes",
+				"title": "Delete Codes"
 			},
 			{
 				"command": "extension.boxcodes",
