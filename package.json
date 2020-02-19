@@ -2,7 +2,7 @@
 	"name": "boxcode",
 	"displayName": "Box Code",
 	"description": "Box for save your codes",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"repository": {
 		"url": "https://github.com/PabloAlmonte/BoxCodes.git",
 		"type": "git"

@@ -3,8 +3,6 @@
 const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
-const api = "http://localhost:3000/api/";
-const request = require('request');
 const defaulDB = {
 	codes: {}
 }
