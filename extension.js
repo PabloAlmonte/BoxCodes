@@ -103,7 +103,34 @@ function activate(context) {
 		// });
 	});
 
-	function getPathFile(folder, name){
+	let deleteCodes = vscode.commands.registerCommand('extension.deletecodes', () => {
+		let quickPick = vscode.window.createQuickPick();
+		var database = JSON.parse(fs.readFileSync(pathDB).toString());
+		let codes = database.codes;
+		quickPick.items = Object.keys(codes).map(id => ({
+			index: id,
+			label: codes[id].title,
+			description: codes[id].languaje,
+			detail: codes[id].text
+		}));
+
+		quickPick.onDidChangeSelection(selection => {
+			quickPick.hide();
+			if (!selection[0]) return;
+
+			let index = selection[0].index;
+			let selectedTitle = codes[index].title;
+			delete codes[index];
+
+			fs.writeFileSync(pathDB, JSON.stringify(database));
+			vscode.window.showInformationMessage(`'${selectedTitle}' removed successfully!`);
+		});
+
+		quickPick.onDidHide(() => quickPick.dispose());
+		quickPick.show();
+	});
+
+	function getPathFile(folder, name) {
 		const onDiskPath = vscode.Uri.file(`${context.extensionPath}/public/${folder}/${name}`);
 		const file = onDiskPath.with({ scheme: 'vscode-resource' });
 		return file.scheme + ":" + file.path;
@@ -112,6 +139,7 @@ function activate(context) {
 	context.subscriptions.push(saveCodeCommand);
 	context.subscriptions.push(showCodesSaved);
 	context.subscriptions.push(selectCodes);
+	context.subscriptions.push(deleteCodes);
 }
 
 exports.activate = activate;
